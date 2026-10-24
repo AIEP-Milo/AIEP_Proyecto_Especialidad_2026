@@ -1,0 +1,55 @@
+Table entrenadores [headercolor: #175e7a] {
+	id_entrenador integer [ pk, increment, not null ]
+	nombre varchar2(100)
+	apellido varchar2(100)
+	especialidad varchar2(100)
+}
+
+Table alumnos [headercolor: #175e7a] {
+	id_alumno integer [ pk, increment, not null ]
+	nombre varchar2(100)
+	apellido varchar2(100)
+	correo varchar2(100)
+	telefono varchar2(100)
+}
+
+Table canchas [headercolor: #175e7a] {
+	id_cancha integer [ pk, increment, not null ]
+	nombre varchar2(100)
+	superficie varchar2(100)
+}
+
+Table inscripciones [headercolor: #175e7a] {
+	id_inscripcion integer [ pk, increment, not null ]
+	fecha_incripcion date
+	estado boolean
+	id_alumno integer
+	id_clase integer
+}
+
+Table clases [headercolor: #175e7a] {
+	id_clase integer [ pk, increment, not null ]
+	fecha date
+	hora_inicio timestamp
+	hora_termino timestamp
+	nivel integer
+	cupo_maximo integer
+	id_entrenador integer
+	id_cancha integer
+}
+
+Ref fk_entrenadores_id_entrenador_clases {
+	entrenadores.id_entrenador < clases.id_entrenador [ delete: no action, update: no action ]
+}
+
+Ref fk_canchas_id_cancha_clases {
+	canchas.id_cancha < clases.id_cancha [ delete: no action, update: no action ]
+}
+
+Ref fk_clases_id_clase_inscripciones {
+	clases.id_clase < inscripciones.id_clase [ delete: no action, update: no action ]
+}
+
+Ref fk_alumnos_id_alumno_inscripciones {
+	alumnos.id_alumno < inscripciones.id_alumno [ delete: no action, update: no action ]
+}
