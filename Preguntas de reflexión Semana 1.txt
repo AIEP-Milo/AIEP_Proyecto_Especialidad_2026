@@ -1,0 +1,13 @@
+Preguntas de reflexión Semana 1
+
+1. ¿Por qué es necesaria la tabla Inscripción?
+Es necesaria porque la relación entre la tabla alumnos y clases es de muchos a muchos: un alumno puede inscribirse en varias clases y una clase puede tener varios alumnos. La tabla inscripción actúa como tabla intermedia de unión.
+
+2. ¿Qué restricción impediría inscribir dos veces al mismo alumno en una clase?
+Una restricción UNIQUE compuesta por id_alumno y id_clase en la tabla inscripciones impediría que un alumno inscriba una clase dos veces.
+
+3. ¿Las claves primarias y foráneas son suficientes para evitar que se supere el cupo máximo? Justifica.
+No porque las PK y FK solo garantizan la integridad referencial y unidad de cada fila, no reglas de agregado de datos.
+
+4. ¿Cómo comprobarías que una cancha no tenga dos clases con horarios superpuestos?
+Se comprueba con una consulta sobre la tabla clases que busque dos filas con el mismo id_cancha, la misma fecha y con intervalos que se solapen, es decir, dos intervalos (inicio, fin) se solapan si inicio1 < fin2 AND inicio2 < fin1.
